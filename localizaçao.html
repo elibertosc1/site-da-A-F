@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" href="favicon-32x32.png" type="image/x-icon">
+  <title>Localização</title>
+
+  <!-- Font Awesome corrigido -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #1e1e1e;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #f0f0f0;
+    }
+
+    /* Seção de localização */
+    #localizacao {
+      text-align: center;
+      padding: 80px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .descricao-endereco {
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+      color: #cccccc;
+      max-width: 800px;
+      line-height: 1.6;
+    }
+
+    .mapbox {
+      width: 100%;
+      max-width: 1000px;
+      background: #2c2c2c;
+      border-radius: 16px;
+      overflow: hidden;
+      padding: 20px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .mapbox:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+    }
+
+    .mapbox iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(2, 2, 2, 0.2);
+    }
+
+    .produto-card {
+      transition: all 0.3s ease;
+    }
+
+    .produto-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .image-zoom-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .image-zoom-container.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .zoom-image {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+
+    .close-zoom {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+:root {
+            --verde-principal: #006d3d;
+            --verde-escuro: #004d2a;
+            --amarelo-destaque: #f4c542;
+            --amarelo-escuro: #e0b937;
+            --cinza-claro: #f8f9fa;
+            --cinza-medio: #e9ecef;
+            --cinza-escuro: #333;
+            --branco: #fff;
+            --preto: #222;
+            --transicao: all 0.3s ease-in-out;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Container da navegação */
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            background-color: var(--branco);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Links */
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            padding: 15px 20px;
+            max-width: 1200px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+            color: var(--cinza-escuro);
+            text-decoration: none;
+            transition: var(--transicao);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link:hover {
+            background-color: var(--cinza-medio);
+            color: var(--verde-principal);
+        }
+
+        .nav-link i {
+            font-size: 1.1rem;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .nav-links {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                -webkit-overflow-scrolling: touch;
+            }
+          }
+            .nav-link {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+    
+
+    @media (max-width: 768px) {
+      /* Remova ou comente qualquer @media que altere flex-direction para column! */
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50">
+
+  <!-- Navegação -->
+  <div class="nav-container">
+    <nav class="nav-links">
+      <a href="produtos.html" class="nav-link">
+        <i class="fas fa-boxes"></i> Produtos
+      </a>
+      <a href="index.html#servicos" class="nav-link">
+        <i class="fas fa-tools"></i> Serviços
+      </a>
+      <a href="index.html#sobre" class="nav-link">
+        <i class="fas fa-building"></i> Sobre Nós
+      </a>
+      <a href="contato.html" class="nav-link">
+        <i class="fas fa-envelope"></i> Contato
+      </a>
+      <a href="localizaçao.html" class="nav-link">
+        <i class="fas fa-map-marker-alt"></i> Localização
+      </a>
+      <a href="TrabalheConosco.html" class="nav-link">
+        <i class="fas fa-user-tie"></i> Trabalhe Conosco
+      </a>
+    </nav>
+  </div>
+
+  <!-- Localização -->
+  <section id="localizacao">
+    <h2>Localização</h2>
+    <p class="descricao-endereco">
+      R. Agricultor Almerindo Luiz da Silva, 807 - Distrito Industrial, João Pessoa - PB, 58082-801<br />
+      De frente à Intrafrut, portão marrom.
+    </p>
+    <div class="mapbox">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63337.26056173295!2d-34.97677097832029!3d-7.174590699999991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ace9ba3ef11895%3A0x1d46581421ff9f6f!2sA%26F%20Pr%C3%A9%20Moldados!5e0!3m2!1spt-BR!2sbr!4v1747405103806!5m2!1spt-BR!2sbr"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </section>
+
+</body>
+</html>

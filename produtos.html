@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos de Concreto Pré-Moldado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="favicon-32x32.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .produto-card {
+            transition: all 0.3s ease;
+        }
+        .produto-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+        .image-zoom-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .image-zoom-container.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .zoom-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+        .close-zoom {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        :root {
+            --verde-principal: #006d3d;
+            --verde-escuro: #004d2a;
+            --amarelo-destaque: #f4c542;
+            --amarelo-escuro: #e0b937;
+            --cinza-claro: #f8f9fa;
+            --cinza-medio: #e9ecef;
+            --cinza-escuro: #333;
+            --branco: #fff;
+            --preto: #222;
+            --transicao: all 0.3s ease-in-out;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Container da navegação */
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            background-color: var(--branco);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Links */
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            padding: 15px 20px;
+            max-width: 1200px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+            color: var(--cinza-escuro);
+            text-decoration: none;
+            transition: var(--transicao);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link:hover {
+            background-color: var(--cinza-medio);
+            color: var(--verde-principal);
+        }
+
+        .nav-link i {
+            font-size: 1.1rem;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .nav-links {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+            .nav-link {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        
+        
+        footer {
+            background: #006d3d;
+            color: #fff;
+            padding: 2rem 0 1rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        footer a {
+            color: #fff;
+            text-decoration: underline;
+            margin: 0 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Navegação -->
+    <div class="nav-container">
+        <nav class="nav-links">
+            <a href="produtos.html" class="nav-link">
+                <i class="fas fa-boxes"></i> Produtos
+            </a>
+            <a href="index.html#servicos" class="nav-link">
+                <i class="fas fa-tools"></i> Serviços
+            </a>
+            <a href="index.html#sobre" class="nav-link">
+                <i class="fas fa-building"></i> Sobre Nós
+            </a>
+            <a href="contato.html" class="nav-link">
+                <i class="fas fa-envelope"></i> Contato
+            </a>
+            <a href="localizaçao.html" class="nav-link">
+                <i class="fas fa-map-marker-alt"></i> Localização
+            </a>
+            <a href="TrabalheConosco.html" class="nav-link">
+                <i class="fas fa-user-tie"></i> Trabalhe Conosco
+            </a>
+        </nav>
+    </div>
+
+    <!-- Produtos -->
+    <section id="produtos" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Nossos Produtos</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                Concreto de qualidade para suas obras de infraestrutura e construção civil
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Produto 1 -->
+            <div class="produto-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="relative h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img src="tubo50.png" alt="Tubo de concreto 50x50cm" class="w-full h-full object-contain p-4 cursor-zoom-in" onclick="ampliarImagem(this.src)">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Tubo de Concreto 50x50 cm</h3>
+                    <p class="text-gray-600 mb-4">Ideal para drenagem, escoamento de águas pluviais e sistemas de saneamento. Produto resistente, durável e de fácil instalação.</p>
+                    <ul class="space-y-2 mb-6 text-sm">
+                        <li class="flex items-start"><i class="fas fa-ruler-combined text-green-600 mt-1 mr-2"></i> Diâmetro interno: 50 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-vertical text-green-600 mt-1 mr-2"></i> Altura: 50 cm</li>
+                        <li class="flex items-start"><i class="fas fa-arrows-alt-h text-green-600 mt-1 mr-2"></i> Espessura: 5 cm</li>
+                        <li class="flex items-start"><i class="fas fa-cubes text-green-600 mt-1 mr-2"></i> Material: Concreto pré-moldado</li>
+                    </ul>
+                    <a href="contato.html" class="w-full inline-block bg-green-700 hover:bg-green-800 text-white text-center py-3 px-4 rounded-lg font-medium transition duration-300 shadow">
+                        <i class="fas fa-file-signature mr-2"></i> Solicitar Orçamento
+                    </a>
+                </div>
+            </div>
+            <!-- Produto 2 -->
+            <div class="produto-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="relative h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img src="tubo400.jpg" alt="Tubo de concreto 400cm" class="w-full h-full object-contain p-4 cursor-zoom-in" onclick="ampliarImagem(this.src)">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Tubo de Concreto 400</h3>
+                    <p class="text-gray-600 mb-4">Ideal para drenagem, escoamento de águas pluviais e sistemas de saneamento. Produto resistente, durável e de fácil instalação.</p>
+                    <ul class="space-y-2 mb-6 text-sm">
+                        <li class="flex items-start"><i class="fas fa-ruler-combined text-green-600 mt-1 mr-2"></i> Diâmetro interno: 40 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-vertical text-green-600 mt-1 mr-2"></i> Altura: 1 m</li>
+                        <li class="flex items-start"><i class="fas fa-arrows-alt-h text-green-600 mt-1 mr-2"></i> Espessura: 38 cm</li>
+                        <li class="flex items-start"><i class="fas fa-cubes text-green-600 mt-1 mr-2"></i> Material: Concreto pré-moldado</li>
+                    </ul>
+                    <a href="contato.html" class="w-full inline-block bg-green-700 hover:bg-green-800 text-white text-center py-3 px-4 rounded-lg font-medium transition duration-300 shadow">
+                        <i class="fas fa-file-signature mr-2"></i> Solicitar Orçamento
+                    </a>
+                </div>
+            </div>
+            <!-- Produto 3 -->
+            <div class="produto-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="relative h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img src="Tubo600.jpg" alt="Tubo de concreto 600" class="w-full h-full object-contain p-4 cursor-zoom-in" onclick="ampliarImagem(this.src)">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Tubo de Concreto 600</h3>
+                    <p class="text-gray-600 mb-4">Ideal para drenagem, escoamento de águas pluviais e sistemas de saneamento. Produto resistente, durável e de fácil instalação.</p>
+                    <ul class="space-y-2 mb-6 text-sm">
+                        <li class="flex items-start"><i class="fas fa-ruler-combined text-green-600 mt-1 mr-2"></i> Diâmetro interno: 60 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-vertical text-green-600 mt-1 mr-2"></i> Altura: 1 m</li>
+                        <li class="flex items-start"><i class="fas fa-arrows-alt-h text-green-600 mt-1 mr-2"></i> Espessura: 12 cm</li>
+                        <li class="flex items-start"><i class="fas fa-cubes text-green-600 mt-1 mr-2"></i> Material: Concreto pré-moldado</li>
+                    </ul>
+                    <a href="contato.html" class="w-full inline-block bg-green-700 hover:bg-green-800 text-white text-center py-3 px-4 rounded-lg font-medium transition duration-300 shadow">
+                        <i class="fas fa-file-signature mr-2"></i> Solicitar Orçamento
+                    </a>
+                </div>
+            </div>
+            <!-- Produto 4 -->
+            <div class="produto-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="relative h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img src="tubo1000.jpg" alt="Tubo de concreto 1000" class="w-full h-full object-contain p-4 cursor-zoom-in" onclick="ampliarImagem(this.src)">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Tubo de Concreto 1000</h3>
+                    <p class="text-gray-600 mb-4">Ideal para drenagem, escoamento de águas pluviais e sistemas de saneamento. Produto resistente, durável e de fácil instalação.</p>
+                    <ul class="space-y-2 mb-6 text-sm">
+                        <li class="flex items-start"><i class="fas fa-ruler-combined text-green-600 mt-1 mr-2"></i> Diâmetro interno: 100 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-vertical text-green-600 mt-1 mr-2"></i> Altura: 1 m</li>
+                        <li class="flex items-start"><i class="fas fa-arrows-alt-h text-green-600 mt-1 mr-2"></i> Espessura: 21 cm</li>
+                        <li class="flex items-start"><i class="fas fa-cubes text-green-600 mt-1 mr-2"></i> Material: Concreto pré-moldado</li>
+                    </ul>
+                    <a href="contato.html" class="w-full inline-block bg-green-700 hover:bg-green-800 text-white text-center py-3 px-4 rounded-lg font-medium transition duration-300 shadow">
+                        <i class="fas fa-file-signature mr-2"></i> Solicitar Orçamento
+                    </a>
+                </div>
+            </div>
+            <!-- Produto 5 -->
+            <div class="produto-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="relative h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img src="tubo1200.png" alt="Tubo de concreto 1200" class="w-full h-full object-contain p-4 cursor-zoom-in" onclick="ampliarImagem(this.src)">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Tubo de Concreto 1200</h3>
+                    <p class="text-gray-600 mb-4">Ideal para drenagem, escoamento de águas pluviais e sistemas de saneamento. Produto resistente, durável e de fácil instalação.</p>
+                    <ul class="space-y-2 mb-6 text-sm">
+                        <li class="flex items-start"><i class="fas fa-ruler-combined text-green-600 mt-1 mr-2"></i> Diâmetro interno: 120 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-vertical text-green-600 mt-1 mr-2"></i> Altura: 1 m</li>
+                        <li class="flex items-start"><i class="fas fa-arrows-alt-h text-green-600 mt-1 mr-2"></i> Espessura: 24 cm</li>
+                        <li class="flex items-start"><i class="fas fa-cubes text-green-600 mt-1 mr-2"></i> Material: Concreto pré-moldado</li>
+                    </ul>
+                    <a href="contato.html" class="w-full inline-block bg-green-700 hover:bg-green-800 text-white text-center py-3 px-4 rounded-lg font-medium transition duration-300 shadow">
+                        <i class="fas fa-file-signature mr-2"></i> Solicitar Orçamento
+                    </a>
+                </div>
+            </div>
+            <!-- Produto 6 -->
+            <div class="produto-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="relative h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img src="Anéis de concreto.jpg" alt="Anéis de concreto" class="w-full h-full object-contain p-4 cursor-zoom-in" onclick="ampliarImagem(this.src)">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Anéis de Concreto</h3>
+                    <p class="text-gray-600 mb-4">Utilizadas na construção civil para estruturar e proteger espaços subterrâneos em projetos de saneamento básico, como poços de água, cisternas, fossas sépticas, entre outros.</p>
+                    <ul class="space-y-2 mb-6 text-sm">
+                        <li class="flex items-start"><i class="fas fa-ruler-combined text-green-600 mt-1 mr-2"></i> Diâmetro: 6 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-horizontal text-green-600 mt-1 mr-2"></i> Externo: 75 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-horizontal text-green-600 mt-1 mr-2"></i> Interno: 51 cm</li>
+                        <li class="flex items-start"><i class="fas fa-cubes text-green-600 mt-1 mr-2"></i> Material: Concreto pré-moldado</li>
+                    </ul>
+                    <a href="contato.html" class="w-full inline-block bg-green-700 hover:bg-green-800 text-white text-center py-3 px-4 rounded-lg font-medium transition duration-300 shadow">
+                        <i class="fas fa-file-signature mr-2"></i> Solicitar Orçamento
+                    </a>
+                </div>
+            </div>
+            <!-- Produto 7 -->
+            <div class="produto-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="relative h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img src="meio fio.png" alt="meio fio" class="w-full h-full object-contain p-4 cursor-zoom-in" onclick="ampliarImagem(this.src)">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Meio Fio</h3>
+                    <p class="text-gray-600 mb-4">Este meio-fio é utilizado em obras rodoviárias e urbanas para delimitar e garantir a drenagem.</p>
+                    <ul class="space-y-2 mb-6 text-sm">
+                        <li class="flex items-start"><i class="fas fa-ruler-combined text-green-600 mt-1 mr-2"></i> Diâmetro: 13 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-horizontal text-green-600 mt-1 mr-2"></i> Comprimento: 98 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-vertical text-green-600 mt-1 mr-2"></i> Altura: 30 cm</li>
+                        <li class="flex items-start"><i class="fas fa-cubes text-green-600 mt-1 mr-2"></i> Material: Concreto pré-moldado</li>
+                    </ul>
+                    <a href="contato.html" class="w-full inline-block bg-green-700 hover:bg-green-800 text-white text-center py-3 px-4 rounded-lg font-medium transition duration-300 shadow">
+                        <i class="fas fa-file-signature mr-2"></i> Solicitar Orçamento
+                    </a>
+                </div>
+            </div>
+            <!-- Produto 8 -->
+            <div class="produto-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="relative h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img src="estaca.png" alt="Estacas" class="w-full h-full object-contain p-4 cursor-zoom-in" onclick="ampliarImagem(this.src)">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Estaca Reta e Curvada</h3>
+                    <p class="text-gray-600 mb-4">Utilizadas na construção civil para estruturar e proteger espaços subterrâneos em projetos de saneamento básico, como poços de água, cisternas, fossas sépticas, entre outros.</p>
+                    <ul class="space-y-2 mb-6 text-sm">
+                        <li class="flex items-start"><i class="fas fa-ruler-combined text-green-600 mt-1 mr-2"></i> Diâmetro: 12 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-vertical text-green-600 mt-1 mr-2"></i> Altura: 2,80 m</li>
+                        <li class="flex items-start"><i class="fas fa-cubes text-green-600 mt-1 mr-2"></i> Material: Concreto pré-moldado</li>
+                    </ul>
+                    <a href="contato.html" class="w-full inline-block bg-green-700 hover:bg-green-800 text-white text-center py-3 px-4 rounded-lg font-medium transition duration-300 shadow">
+                        <i class="fas fa-file-signature mr-2"></i> Solicitar Orçamento
+                    </a>
+                </div>
+            </div>
+            <!-- Produto 9 -->
+            <div class="produto-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="relative h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img src="TUBO PARA PV 800.png" alt="TUBO PARA PV 800" class="w-full h-full object-contain p-4 cursor-zoom-in" onclick="ampliarImagem(this.src)">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Tubo para PV 800</h3>
+                    <p class="text-gray-600 mb-4">Utilizadas na construção civil para estruturar e proteger espaços subterrâneos em projetos de saneamento básico, como poços de água, cisternas, fossas sépticas, entre outros.</p>
+                    <ul class="space-y-2 mb-6 text-sm">
+                        <li class="flex items-start"><i class="fas fa-ruler-combined text-green-600 mt-1 mr-2"></i> Diâmetro interno: 80 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-vertical text-green-600 mt-1 mr-2"></i> Altura: 50 cm</li>
+                        <li class="flex items-start"><i class="fas fa-arrows-alt-h text-green-600 mt-1 mr-2"></i> Espessura: 15 cm</li>
+                        <li class="flex items-start"><i class="fas fa-cubes text-green-600 mt-1 mr-2"></i> Material: Concreto pré-moldado</li>
+                    </ul>
+                    <a href="contato.html" class="w-full inline-block bg-green-700 hover:bg-green-800 text-white text-center py-3 px-4 rounded-lg font-medium transition duration-300 shadow">
+                        <i class="fas fa-file-signature mr-2"></i> Solicitar Orçamento
+                    </a>
+                </div>
+            </div>
+            <!-- Produto 10 -->
+            <div class="produto-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="relative h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img src="TUBO DE 1200  perfurado.png" alt="TUBO DE 1200 perfurado" class="w-full h-full object-contain p-4 cursor-zoom-in" onclick="ampliarImagem(this.src)">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Tubo de 1200 Perfurado</h3>
+                    <p class="text-gray-600 mb-4">Ideal para drenagem, escoamento de águas pluviais e sistemas de saneamento. Produto resistente, durável e de fácil instalação.</p>
+                    <ul class="space-y-2 mb-6 text-sm">
+                        <li class="flex items-start"><i class="fas fa-ruler-combined text-green-600 mt-1 mr-2"></i> Diâmetro interno: 120 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-vertical text-green-600 mt-1 mr-2"></i> Altura: 1 m</li>
+                        <li class="flex items-start"><i class="fas fa-arrows-alt-h text-green-600 mt-1 mr-2"></i> Espessura: 24 cm</li>
+                        <li class="flex items-start"><i class="fas fa-cubes text-green-600 mt-1 mr-2"></i> Material: Concreto pré-moldado</li>
+                    </ul>
+                    <a href="contato.html" class="w-full inline-block bg-green-700 hover:bg-green-800 text-white text-center py-3 px-4 rounded-lg font-medium transition duration-300 shadow">
+                        <i class="fas fa-file-signature mr-2"></i> Solicitar Orçamento
+                    </a>
+                </div>
+            </div>
+            <!-- Produto 11 -->
+            <div class="produto-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="relative h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img src="tubo 800.png" alt="TUBO DE 800" class="w-full h-full object-contain p-4 cursor-zoom-in" onclick="ampliarImagem(this.src)">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Tubo de 800</h3>
+                    <p class="text-gray-600 mb-4">Ideal para drenagem, escoamento de águas pluviais e sistemas de saneamento. Produto resistente, durável e de fácil instalação.</p>
+                    <ul class="space-y-2 mb-6 text-sm">
+                        <li class="flex items-start"><i class="fas fa-ruler-combined text-green-600 mt-1 mr-2"></i> Diâmetro interno: 80 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-vertical text-green-600 mt-1 mr-2"></i> Altura: 1 m</li>
+                        <li class="flex items-start"><i class="fas fa-arrows-alt-h text-green-600 mt-1 mr-2"></i> Espessura: 15 cm</li>
+                        <li class="flex items-start"><i class="fas fa-cubes text-green-600 mt-1 mr-2"></i> Material: Concreto pré-moldado</li>
+                    </ul>
+                    <a href="contato.html" class="w-full inline-block bg-green-700 hover:bg-green-800 text-white text-center py-3 px-4 rounded-lg font-medium transition duration-300 shadow">
+                        <i class="fas fa-file-signature mr-2"></i> Solicitar Orçamento
+                    </a>
+                </div>
+            </div>
+            <!-- Produto 12 - Canaleta CAN003 -->
+            <div class="produto-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="relative h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img src="grelha-de-concreto.JPG" alt="Canaleta CAN003" class="w-full h-full object-contain p-4 cursor-zoom-in" onclick="ampliarImagem(this.src)">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Canaleta/Dreno</h3>
+                    <p class="text-gray-600 mb-4">Canaleta pré-moldada ideal para drenagem de águas pluviais, escoamento superficial e obras de infraestrutura urbana e rodoviária.</p>
+                    <ul class="space-y-2 mb-6 text-sm">
+                        <li class="flex items-start"><i class="fas fa-ruler-combined text-green-600 mt-1 mr-2"></i> Altura: 26 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-horizontal text-green-600 mt-1 mr-2"></i> Largura superior: 28,9 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-horizontal text-green-600 mt-1 mr-2"></i> Largura inferior: 15,5 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-vertical text-green-600 mt-1 mr-2"></i> Altura útil interna: 14,4 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-horizontal text-green-600 mt-1 mr-2"></i> Comprimento: 49,5 cm</li>
+                        <li class="flex items-start"><i class="fas fa-cubes text-green-600 mt-1 mr-2"></i> Material: Concreto pré-moldado</li>
+                    </ul>
+                    <a href="contato.html" class="w-full inline-block bg-green-700 hover:bg-green-800 text-white text-center py-3 px-4 rounded-lg font-medium transition duration-300 shadow">
+                        <i class="fas fa-file-signature mr-2"></i> Solicitar Orçamento
+                    </a>
+                </div>
+            </div>
+            <!-- Produto 13 - Marco pré-moldado -->
+            <div class="produto-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="relative h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img src="marco pré-moldado.jpg" alt="Marco Pré-Moldado" class="w-full h-full object-contain p-4 cursor-zoom-in" onclick="ampliarImagem(this.src)">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Marco Pré-Moldado</h3>
+                    <p class="text-gray-600 mb-4">Ideal para demarcação de terrenos, limites de propriedades e obras de infraestrutura urbana e rural. Alta resistência e durabilidade, garantindo estabilidade e visibilidade mesmo em condições climáticas adversas.</p>
+                    <ul class="space-y-2 mb-6 text-sm">
+                        <li class="flex items-start"><i class="fas fa-ruler-combined text-green-600 mt-1 mr-2"></i> Altura: 60 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-horizontal text-green-600 mt-1 mr-2"></i> Largura superior: 8 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-horizontal text-green-600 mt-1 mr-2"></i> Largura inferior: 12 cm</li>
+                        <li class="flex items-start"><i class="fas fa-cubes text-green-600 mt-1 mr-2"></i> Material: Concreto pré-moldado</li>
+                    </ul> <br> <br> <br> <br>
+                    <a href="contato.html" class="w-full inline-block bg-green-700 hover:bg-green-800 text-white text-center py-3 px-4 rounded-lg font-medium transition duration-300 shadow">
+                        <i class="fas fa-file-signature mr-2"></i> Solicitar Orçamento
+                    </a>
+                </div>
+            </div>
+        
+        <!-- Produto 14 - tampa com furo -->
+            <div class="produto-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="relative h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img src="tampa com furo.PNG" alt="tampa com furo" class="w-full h-full object-contain p-4 cursor-zoom-in" onclick="ampliarImagem(this.src)">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Tampa com furo varias medidas</h3>
+                    <p class="text-gray-600 mb-4">Todas possuem um furo lateralizado, utilizado para facilitar o manuseio ou permitir encaixe em estrutura 
+                         Essas tampas são geralmente aplicadas em poços de visita, caixas de inspeção, redes de drenagem e sistemas de saneamento, servindo como fechamento seguro e resistente.</p>
+                    <ul class="space-y-2 mb-6 text-sm">
+                        <li class="flex items-start"><i class="fas fa-ruler-combined text-green-600 mt-1 mr-2"></i>Sobre medidas</li>
+                        
+                        <li class="flex items-start"><i class="fas fa-cubes text-green-600 mt-1 mr-2"></i> Material: Concreto pré-moldado</li>
+                    </ul>
+                    <a href="contato.html" class="w-full inline-block bg-green-700 hover:bg-green-800 text-white text-center py-3 px-4 rounded-lg font-medium transition duration-300 shadow">
+                        <i class="fas fa-file-signature mr-2"></i> Solicitar Orçamento
+                    </a>
+                </div>
+            </div>
+             <!-- Produto 14 - tampa com furo -->
+            <div class="produto-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="relative h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img src="caixa de inspeção 50x50.png" alt="caixa de inspeção" class="w-full h-full object-contain p-4 cursor-zoom-in" onclick="ampliarImagem(this.src)">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">caixa de inspeção 50x50</h3>
+                    <p class="text-gray-600 mb-4">A caixa de inspeção pré-moldada é um elemento essencial para redes de esgoto, drenagem pluvial e sistemas subterrâneos. Fabricada em concreto de alta resistência, garante durabilidade, praticidade na instalação e fácil acesso para manutenção e inspeção das tubulações.
+                 Seu uso é indicado em obras de infraestrutura urbana, loteamentos, indústrias e áreas residenciais, oferecendo segurança estrutural, padronização e economia de tempo na execução.</p>
+                    <ul class="space-y-2 mb-6 text-sm">
+                        <li class="flex items-start"><i class="fas fa-ruler-combined text-green-600 mt-1 mr-2"></i> Diâmetro interno: 50 cm</li>
+                        <li class="flex items-start"><i class="fas fa-ruler-vertical text-green-600 mt-1 mr-2"></i> Altura: 50 cm</li>
+                        <li class="flex items-start"><i class="fas fa-arrows-alt-h text-green-600 mt-1 mr-2"></i> Espessura: 5 cm</li>
+                        <li class="flex items-start"><i class="fas fa-cubes text-green-600 mt-1 mr-2"></i> Material: Concreto pré-moldado</li>
+                    </ul>
+                    <a href="contato.html" class="w-full inline-block bg-green-700 hover:bg-green-800 text-white text-center py-3 px-4 rounded-lg font-medium transition duration-300 shadow">
+                        <i class="fas fa-file-signature mr-2"></i> Solicitar Orçamento
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Zoom Modal -->
+        <div id="imageZoomContainer" class="image-zoom-container">
+            <span class="close-zoom" onclick="fecharImagem()">&times;</span>
+            <img id="zoomedImage" class="zoom-image" src="" alt="Imagem ampliada">
+        </div>
+    </section>
+
+    
+
+    <script>
+        function ampliarImagem(src) {
+            const container = document.getElementById('imageZoomContainer');
+            const img = document.getElementById('zoomedImage');
+            img.src = src;
+            container.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function fecharImagem() {
+            const container = document.getElementById('imageZoomContainer');
+            container.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('imageZoomContainer').addEventListener('click', function(e) {
+            if (e.target === this) {
+                fecharImagem();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                fecharImagem();
+            }
+        });
+    </script>
+</body>
+</html>

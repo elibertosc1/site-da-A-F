@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeria - A&F Pré Moldados</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --verde-principal: #006d3d;
+      --verde-escuro: #004d2a;
+      --amarelo-destaque: #f4c542;
+      --amarelo-escuro: #e0b937;
+      --cinza-claro: #f8f9fa;
+      --cinza-medio: #e9ecef;
+      --cinza-escuro: #333;
+      --branco: #fff;
+      --preto: #222;
+      --transicao: all 0.3s ease-in-out;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--cinza-claro);
+    }
+
+    /* Navegação */
+    .nav-container {
+      display: flex;
+      justify-content: center;
+      background-color: var(--branco);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 15px;
+      padding: 15px 20px;
+      max-width: 1200px;
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-weight: 500;
+      color: var(--cinza-escuro);
+      text-decoration: none;
+      transition: var(--transicao);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link:hover {
+      background-color: var(--cinza-medio);
+      color: var(--verde-principal);
+    }
+
+    .nav-link i {
+      font-size: 1.1rem;
+    }
+
+    /* Galeria */
+    .gallery-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .gallery-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--verde-principal);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 80%;
+      border-radius: 12px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: var(--branco);
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: var(--transicao);
+    }
+
+    .modal-close:hover {
+      color: var(--amarelo-destaque);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .nav-link {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navegação -->
+  <div class="nav-container">
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Início</a>
+      <a href="produtos.html" class="nav-link"><i class="fas fa-boxes"></i> Produtos</a>
+      <a href="index.html#servicos" class="nav-link"><i class="fas fa-tools"></i> Serviços</a>
+      <a href="index.html#sobre" class="nav-link"><i class="fas fa-building"></i> Sobre Nós</a>
+      <a href="contato.html" class="nav-link"><i class="fas fa-envelope"></i> Contato</a>
+      <a href="localizaçao.html" class="nav-link"><i class="fas fa-map-marker-alt"></i> Localização</a>
+      <a href="TrabalheConosco.html" class="nav-link"><i class="fas fa-user-tie"></i> Trabalhe Conosco</a>
+      <a href="galeria.html" class="nav-link"><i class="fas fa-images"></i> Galeria</a>
+    </nav>
+  </div>
+
+  <!-- Galeria -->
+  <div class="gallery-container">
+    <h1 class="gallery-title">Nossa Galeria</h1>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="1.png" alt="Imagem 1"></div>
+      <div class="gallery-item"><img src="2.png" alt="Imagem 2"></div>
+      <div class="gallery-item"><img src="3.png" alt="Imagem 3"></div>
+      <div class="gallery-item"><img src="4.png" alt="Imagem 4"></div>
+      <div class="gallery-item"><img src="5.png" alt="Imagem 5"></div>
+      <div class="gallery-item"><img src="6.png" alt="Imagem 6"></div>
+      <div class="gallery-item"><img src="7.png" alt="Imagem 7"></div>
+      <div class="gallery-item"><img src="8.png" alt="Imagem 8"></div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="myModal" class="modal">
+    <span class="modal-close">&times;</span>
+    <img class="modal-content" id="modalImg">
+  </div>
+
+  <script>
+    const modal = document.getElementById("myModal");
+    const modalImg = document.getElementById("modalImg");
+    const closeBtn = document.getElementsByClassName("modal-close")[0];
+
+    document.querySelectorAll(".gallery-item img").forEach(img => {
+      img.onclick = function() {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+      }
+    });
+
+    closeBtn.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>
